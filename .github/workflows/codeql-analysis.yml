@@ -17,6 +17,7 @@ jobs:
       SOLUTION: 'PartsUnlimited-aspnet45/PartsUnlimited.sln'
       BUILD_PLATFORM: 'Any CPU'
       BUILD_CONFIGURATION: 'Release'
+      PROJECT: 'PartsUnlimited-aspnet45/src/PartsUnlimitedWebsite/PartsUnlimitedWebsite.csproj'
 
     steps:
     - name: Checkout repository
@@ -62,7 +63,7 @@ jobs:
         Get-ChildItem -Path . -Recurse
         Set-Location $Env:GITHUB_WORKSPACE
         nuget restore $Env:SOLUTION
-        msbuild $Env:SOLUTION /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:configuration=$Env:BUILD_CONFIGURATION /p:platform="$Env:BUILD_PLATFORM"
+        msbuild $Env:PROJECT /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:configuration=$Env:BUILD_CONFIGURATION /p:platform="$Env:BUILD_PLATFORM"
       shell: pwsh
 
     - name: Perform CodeQL Analysis
