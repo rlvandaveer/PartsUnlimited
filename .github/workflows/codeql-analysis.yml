@@ -58,6 +58,7 @@ jobs:
 
     - name: Build and Publish Solution
       run: |
+        Get-ChildItem -Path . -Recurse
         Set-Location $Env:GITHUB_WORKSPACE
         nuget restore $Env:SOLUTION
         msbuild $Env:SOLUTION /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:configuration=$Env:BUILD_CONFIGURATION /p:platform="$Env:BUILD_PLATFORM"
