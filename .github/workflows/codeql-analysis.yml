@@ -58,6 +58,7 @@ jobs:
 
     - name: Build and Publish Solution
       run: |
+        Write-Output $Env:GITHUB_WORKSPACE
         Get-ChildItem -Path . -Recurse
         Set-Location $Env:GITHUB_WORKSPACE
         nuget restore $Env:SOLUTION
